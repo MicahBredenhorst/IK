@@ -38,3 +38,23 @@ TEST(VectorSquaredDistance, case1)
     double result = VectorSquaredDistance(v1, v2);
     EXPECT_NEAR(294, result, 0.01);
 }
+
+TEST(CrossProduct, case1)
+{
+    Vector v1 (1,2,3);
+    Vector v2 (4,5,6);
+    Vector result = CrossProduct(v1, v2);
+    EXPECT_EQ(-3, result.x);
+    EXPECT_EQ(6, result.y);
+    EXPECT_EQ(-3, result.z);
+}
+
+TEST(CrossProduct, case2)
+{
+    Vector v1 (12,22,3);
+    Vector v2 (4,35,16);
+    Vector result = CrossProduct(v1, v2);
+    EXPECT_EQ(247, result.x);
+    EXPECT_EQ(-180, result.y);
+    EXPECT_EQ(332, result.z);
+}
