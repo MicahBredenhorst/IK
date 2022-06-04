@@ -15,6 +15,7 @@ class Vector
         };
         void Normalize();
         void Print();
+        Vector Subtract(Vector v1);
 };
 
 #endif
