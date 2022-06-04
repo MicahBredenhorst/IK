@@ -40,6 +40,10 @@ target_include_directories(Link
   PUBLIC Vector
 )
 
+target_include_directories(Vector
+  PUBLIC Math
+)
+
 # Make directories available for Test build target
 target_include_directories(${TEST_NAME}
     PUBLIC IK

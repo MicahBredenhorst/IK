@@ -1,6 +1,6 @@
 #include "Math.h"
 #include <math.h>
-#include <Vector.h>
+#include "Vector.h"
 
 
 double DotProduct(Vector v1, Vector v2)
@@ -11,6 +11,11 @@ double DotProduct(Vector v1, Vector v2)
 double RadiansToDegree(double radians)
 {
     return (radians * 180 / M_PI);
+}
+
+double DegreesToRadians(double degrees)
+{
+    return degrees * M_PI / 180;
 }
 
 double VectorSquaredDistance(Vector v1, Vector v2)

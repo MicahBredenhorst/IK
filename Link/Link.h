@@ -13,7 +13,7 @@ class Link
         double damp_width = 0; 
         Link(){};
 
-        Link(Vector rot, Vector loc){
+        Link(Vector loc, Vector rot){
             Link::rot = rot;
             Link::loc = loc;
         };
@@ -25,6 +25,7 @@ class Link
             Link::min_rz = min_rz;
             Link::damp_width = damp_width;
         };
+        void Print();
 };
 
 #endif

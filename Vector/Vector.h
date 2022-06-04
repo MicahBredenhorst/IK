@@ -16,6 +16,7 @@ class Vector
         void Normalize();
         void Print();
         Vector Subtract(Vector v1);
+        Vector Rotate(double angle);
 };
 
 #endif
