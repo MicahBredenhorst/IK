@@ -40,6 +40,11 @@ target_include_directories(Link
   PUBLIC Vector
 )
 
+target_include_directories(IK
+  PUBLIC Link
+  PUBLIC Vector
+)
+
 target_include_directories(Vector
   PUBLIC Math
 )

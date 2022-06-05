@@ -8,23 +8,19 @@ class Link
     public:
         Vector rot;     // Rotation of the link
         Vector loc;     // Location of the link
-        double max_rz = 0;  // Maximum rotation
-        double min_rz = 0;  // Mimimum rotation
-        double damp_width = 0; 
+        double max_rz;  // Maximum rotation
+        double min_rz;  // Mimimum rotation
+        double damp_width; 
         Link(){};
 
-        Link(Vector loc, Vector rot){
-            Link::rot = rot;
-            Link::loc = loc;
-        };
+        Link(Vector loc, Vector rot) 
+            : rot(rot), loc(loc)
+        {}
 
-        Link(Vector rot, Vector loc, double max_rz, double min_rz, double damp_width){
-            Link::rot = rot;
-            Link::loc = loc;
-            Link::max_rz = max_rz;
-            Link::min_rz = min_rz;
-            Link::damp_width = damp_width;
-        };
+        Link(Vector loc, Vector rot, double max_rz, double min_rz, double damp_width)
+            : rot(rot), loc(loc), max_rz(max_rz), min_rz(min_rz), damp_width(damp_width)
+        {}
+
         void Print();
 };
 
