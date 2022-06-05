@@ -20,10 +20,10 @@ TEST(Subtract, case1)
     EXPECT_EQ(vResult.z, 1);
 }
 
-TEST(Rotate, case1)
+TEST(RotateZAxis, case1)
 {
     Vector v1(0,1,0);
-    Vector vOut = v1.Rotate(35);
+    Vector vOut = v1.RotateZAxis(35);
     vOut.Print();
     EXPECT_NEAR(vOut.x, 0.700, 0.01);
     EXPECT_NEAR(vOut.y, 0.700, 0.01);
