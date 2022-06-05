@@ -23,9 +23,35 @@ TEST(Subtract, case1)
 TEST(RotateZAxis, case1)
 {
     Vector v1(0,1,0);
-    Vector vOut = v1.RotateZAxis(35);
-    vOut.Print();
-    EXPECT_NEAR(vOut.x, 0.700, 0.01);
-    EXPECT_NEAR(vOut.y, 0.700, 0.01);
-    EXPECT_NEAR(vOut.z, 0.700, 0.01);
+    Vector vOut = v1.RotateZAxis(35); // 35 clockwise
+    EXPECT_NEAR(vOut.x, -0.574, 0.01);
+    EXPECT_NEAR(vOut.y, 0.819 , 0.01);
+    EXPECT_NEAR(vOut.z, 0, 0.01);
+}
+
+TEST(RotateZAxis, case2)
+{
+    Vector v1(5,3,1);
+    Vector vOut = v1.RotateZAxis(-45); // 45 counter clockwise
+    EXPECT_NEAR(vOut.x, 5.656, 0.01);
+    EXPECT_NEAR(vOut.y, -1.414, 0.01);
+    EXPECT_NEAR(vOut.z, 0, 0.01);
+}
+
+TEST(RotateYAxis, case1)
+{
+    Vector v1(0,0,1);
+    Vector vOut = v1.RotateYAxis(35); // 35 clockwise
+    EXPECT_NEAR(vOut.x, 0.574, 0.01);
+    EXPECT_NEAR(vOut.y, 0, 0.01);
+    EXPECT_NEAR(vOut.z, 0.819, 0.01);
+}
+
+TEST(RotateYAxis, case2)
+{
+    Vector v1(5,3,1);
+    Vector vOut = v1.RotateYAxis(-45); // 45 counter clockwise
+    EXPECT_NEAR(vOut.x, 2.828, 0.001);
+    EXPECT_NEAR(vOut.y, 0, 0.001);
+    EXPECT_NEAR(vOut.z, 4.243, 0.001);
 }

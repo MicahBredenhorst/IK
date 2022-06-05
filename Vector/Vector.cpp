@@ -33,8 +33,8 @@ Vector Vector::RotateZAxis(double angle)
     // A rotation on the z axis causes movement on the x and y axis.
     Vector vOut;
     double radians = angle * M_PI / 180;
-    vOut.x = cos(radians * this->x) - sin(radians * this->y);
-    vOut.y = sin(radians * this->x) + cos(radians * this->y);
+    vOut.x = cos(radians) * this->x - sin(radians) * this->y;
+    vOut.y = sin(radians) * this->x + cos(radians) * this->y;
     return vOut;
 }
 
@@ -43,7 +43,7 @@ Vector Vector::RotateYAxis(double angle)
     // A rotation on the y axis causes movement on x and z axis
     Vector vOut;
     double radians = angle * M_PI / 180;
-    vOut.x = sin(radians * this->x) + cos(radians * this->y);
-    vOut.z = cos(radians * this->x) - sin(radians * this->y);
+    vOut.x = sin(radians) * this->z + cos(radians) * this->x;
+    vOut.z = cos(radians) * this->z - sin(radians) * this->x;
     return vOut;
 }
