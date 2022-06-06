@@ -35,7 +35,7 @@ TEST(RotateZAxis, case2)
     Vector vOut = v1.RotateZAxis(-45); // 45 counter clockwise
     EXPECT_NEAR(vOut.x, 5.656, 0.01);
     EXPECT_NEAR(vOut.y, -1.414, 0.01);
-    EXPECT_NEAR(vOut.z, 0, 0.01);
+    EXPECT_NEAR(vOut.z, 1, 0.01);
 }
 
 TEST(RotateYAxis, case1)
@@ -52,6 +52,15 @@ TEST(RotateYAxis, case2)
     Vector v1(5,3,1);
     Vector vOut = v1.RotateYAxis(-45); // 45 counter clockwise
     EXPECT_NEAR(vOut.x, 2.828, 0.001);
-    EXPECT_NEAR(vOut.y, 0, 0.001);
+    EXPECT_NEAR(vOut.y, 3, 0.001);  
     EXPECT_NEAR(vOut.z, 4.243, 0.001);
+}
+
+TEST(Reset, case1)
+{
+    Vector v1(2,3,4);
+    v1.Reset();
+    EXPECT_EQ(v1.x, 0);
+    EXPECT_EQ(v1.y, 0);
+    EXPECT_EQ(v1.z, 0);
 }

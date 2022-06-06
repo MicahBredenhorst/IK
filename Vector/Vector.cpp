@@ -1,8 +1,5 @@
 #include "Vector.h"
 #include <iostream>
-
-//#include "Math.h" // this is a problem
-
 #include <math.h>
 
 void Vector::Print()
@@ -35,6 +32,7 @@ Vector Vector::RotateZAxis(double angle)
     double radians = angle * M_PI / 180;
     vOut.x = cos(radians) * this->x - sin(radians) * this->y;
     vOut.y = sin(radians) * this->x + cos(radians) * this->y;
+    vOut.z = this->z;
     return vOut;
 }
 
@@ -45,5 +43,12 @@ Vector Vector::RotateYAxis(double angle)
     double radians = angle * M_PI / 180;
     vOut.x = sin(radians) * this->z + cos(radians) * this->x;
     vOut.z = cos(radians) * this->z - sin(radians) * this->x;
+    vOut.y = this->y;
     return vOut;
+}
+
+void Vector::Reset(){
+    this->x = 0;
+    this->y = 0;
+    this->z = 0;
 }

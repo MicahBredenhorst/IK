@@ -105,6 +105,7 @@ int main(){
                 }
             }
             // Calculate the rotation of the entire chain.
+            // TODO: rethink the order of this item.
             applyRotation(arm, armPrevious);
 
             if(--link < 0) link = EFFECTOR_POS - 1; // Restart
