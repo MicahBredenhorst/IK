@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <IK.h>
+#include <Math.h>
 #include <iostream>
 
 TEST(dampRotation, case1)
@@ -18,28 +19,37 @@ TEST(dampRotation, case2)
     EXPECT_EQ(turnDeg, 9);
 }
 
+TEST(dampRotation, case3)
+{
+    double turnDeg = -9;
+    Link link(Vector(0,0,0), Vector(0,0,0), 0, 0, 8);
+    dampRotation(&turnDeg, &link);
+    EXPECT_EQ(turnDeg, -8);
+}
+
+
+
+// max, min
 TEST(restrictRotation, case1)
 {
     Link link(Vector(0,0,0), Vector(30,0,0), 20, 0, 0);
-    Rotation direction = Rotation::clockwise;
-    restrictRotation(&link.rot.x, link, direction);
+    restrictRotation(&link.rot.x, link);
     EXPECT_EQ(link.rot.x, 20); 
 }
 
+// max, min
 TEST(restrictRotation, case2)
 {
-    Link link(Vector(0,0,0), Vector(10,0,0), 0, 20, 0);
-    Rotation direction = Rotation::counterClockwise;
-    restrictRotation(&link.rot.x, link, direction);
-    EXPECT_EQ(link.rot.x, 20); 
+    Link link(Vector(0,0,0), Vector(19,0,0), 40, 20, 0);
+    restrictRotation(&link.rot.x, link);
+    EXPECT_EQ(link.rot.x, 19); 
 }
 
 
 TEST(restrictRotation, case3)
 {
     Link link(Vector(0,0,0), Vector(10,0,0), 20, 0, 0);
-    Rotation direction = Rotation::clockwise;
-    restrictRotation(&link.rot.x, link, direction);
+    restrictRotation(&link.rot.x, link);
     EXPECT_EQ(link.rot.x, 10); 
 }
 
@@ -54,47 +64,6 @@ TEST(getRotationDirection, case2)
     double crossProduct = -0.1;
     EXPECT_EQ(Rotation::counterClockwise, getRotationDirection(crossProduct));
 }
-
-// TEST(applyRotation, case1)
-// {
-//     // SEGEMENATION FAULT?
-//     // Addition of rotation z part causes segmentation fault..
-//     Link armPrevious[1];
-//     armPrevious[0] = Link(Vector(5,3,1), Vector(0,0,0));
-
-//     // This is a rotation on the y axis.
-//     Link arm[1];
-//     arm[0] = Link(Vector(5,3,1), Vector(0,-45,0));
-
-//     applyRotation(arm, armPrevious);
-//     EXPECT_NEAR(arm[0].loc.x, 2.828, 0.001);
-//     EXPECT_NEAR(arm[0].loc.y, 3, 0.001);
-//     EXPECT_NEAR(arm[0].loc.z, 4.243, 0.001);
-// }
-
-// TEST(applyRotation, case2)
-// {
-//     Link armPrevious[2];
-//     armPrevious[0] = Link(Vector(5,3,1), Vector(0,0,0));
-
-//     Link arm[2];
-//     arm[0] = Link(Vector(5,3,1), Vector(0,-45,0));
-    
-// }
-
-// TEST(applyRotation, case2)
-// {
-//     Link armPrevious[1];
-//     armPrevious[0] = Link(Vector(5,3,1), Vector(0,10,0));
-
-//     Link arm[1];
-//     arm[0] = Link(Vector(5,3,1), Vector(0,10,0));
-
-//     applyRotation(arm, armPrevious);
-//     EXPECT_NEAR(arm[0].loc.x, 2.828, 0.001);
-//     EXPECT_NEAR(arm[0].loc.y, 3, 0.001);
-//     EXPECT_NEAR(arm[0].loc.z, 4.243, 0.001);
-// }
 
 //TURN ON Z axis
 TEST(forwardsKinematics, case1)
@@ -178,3 +147,47 @@ TEST(forwardsKinematics, case4)
     EXPECT_EQ(arm[4].loc.z, -2);
 }
 
+// Test rotate link 4 on the z axis by 15 clockwise
+TEST(setRotation, case1)
+{
+    Link arm[5];
+    arm[0] = Link(2, Vector(0,0,0), 359.0, 1.0, 100.0, Axis::y);
+    arm[1] = Link(2, Vector(0,0,0), 359.0, 1.0, 100.0, Axis::y);
+    arm[2] = Link(2, Vector(0,0,0), 359.0, 1.0, 100.0, Axis::y);
+    arm[3] = Link(2, Vector(0,0,0), 359.0, 1.0, 100.0, Axis::y);
+    arm[4] = Link(2, Vector(0,0,0), 359.0, 1.0, 100.0, Axis::y);
+
+    forwardsKinematics(arm, 5);
+
+    setRotation(arm, 4, 15, Axis::z);
+
+    EXPECT_EQ(arm[4].rot.z, 15);
+}
+
+TEST(setRotation, case2)
+{
+    Link arm[5];
+    arm[0] = Link(2, Vector(0,0,0), 359.0, 1.0, 100.0, Axis::y);
+    arm[1] = Link(2, Vector(0,0,0), 359.0, 1.0, 100.0, Axis::y);
+    arm[2] = Link(2, Vector(0,0,0), 359.0, 1.0, 100.0, Axis::y);
+    arm[3] = Link(2, Vector(0,0,0), 359.0, 1.0, 100.0, Axis::y);
+    arm[4] = Link(2, Vector(0,0,0), 359.0, 1.0, 100.0, Axis::y);
+
+    forwardsKinematics(arm, 5);
+
+    setRotation(arm, 3, 15, Axis::y);
+
+    EXPECT_EQ(arm[3].rot.y, 15);
+}
+
+TEST(calculateRotation, case1){
+    Vector v1(1.050644, 0 , 1.701807);
+    Vector v2(2,0,0);
+
+    v1.Normalize();
+    v2.Normalize();
+
+    double cosAngle = DotProduct(v1, v2);
+
+    EXPECT_NEAR(58.5, calculateRotation(cosAngle), 0.3);
+}
