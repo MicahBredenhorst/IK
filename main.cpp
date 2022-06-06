@@ -11,7 +11,7 @@
 #include <iterator>
 
 #define EFFECTOR_POS 5     // Amount of links in chain
-#define MAX_IK_TRIES 5
+#define MAX_IK_TRIES 20
 #define IK_POS_THRES 0.8f
 
 Link arm[EFFECTOR_POS];
@@ -74,7 +74,6 @@ int main(){
             // Set the correct rotation axis
             Axis axis = arm[link].axis;
 
-            // Set the rotation on a specific link.
             if(cosAngle < 0.99999){
                 double crossResultAxis;
                 switch(axis){
@@ -91,11 +90,11 @@ int main(){
                 }
             }
             // Calculate the rotation of the entire chain.
-            std::cout << "Try: " << tries << std::endl;
-            PrintArm();                
+            std::cout << "Try: " << tries << std::endl;              
             forwardsKinematics(arm, EFFECTOR_POS);
+            PrintArm();  
             if(--link < 0){
-                link = EFFECTOR_POS - 1; // Restart
+                link = EFFECTOR_POS - 2; // Restart
             } 
         }
 
